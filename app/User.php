@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email','username', 'password',
     ];
 
     /**
@@ -36,4 +36,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+     // To create User profile during registration
+
+    protected static function boot(){
+
+     parent::boot();
+
+     static::created(function($user){
+
+        $user->profile()->create([
+         'title'=>$user->username,
+        ]);
+
+     });
+
+    }
+    public function profile(){
+
+        return $this->hasOne(Profile::class);
+    }
 }
