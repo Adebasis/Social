@@ -8,7 +8,7 @@ class Profile extends Model
 {
     //
 
-     protected $guarded=[];
+    protected $guarded=[];
 
     public function user(){
 
