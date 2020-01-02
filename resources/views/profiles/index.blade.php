@@ -5,19 +5,34 @@
     <div class="row">
 
           <div class="col-3 p-5">
-            <img src="/logo/logo.jpg" style="max-height:100px;" class="rounded-circle">
+            @if($user->profile->image ==="")
+            
+             <img src="logo/noimage.PNG" style="max-height:100px;" class="rounded-circle">
+            @else
+
+            
+              <img src="/storage/{{$user->profile->image}}" style="max-height:100px;" class="rounded-circle">
+            @endif
+
           </div>
           <div class="col-9">
 
             <div class="d-flex justify-content-between align-items-baseline pt-5">
+              <div class="d-flex align-items-center pb-3">
+                <div class="h4">{{$user->username}}</div>
+               <!-- View Component-->
+               <follow-button user-id="{{ $user->id }}" follows="{{ $follows }}"></follow-button>
 
-                <h1>{{$user->username}}</h1>
-
+               </div> 
+                @can('update',$user->profile)
                 <a href="/post/create">Add New Post</a>
+
+                @endcan
             </div>
             <div>
-            
+              @can('update',$user->profile)
                  <a href="/profile/{{$user->id}}/edit">Edit Profile</a>
+              @endcan
             </div>
               <div class="d-flex">  
                 <div class="pr-3">{{$user->posts->count()}} <span>  Post</span></div>

@@ -16,7 +16,7 @@
                             <label for="title" class="col-md-4 col-form-label text-md-right">Title</label>
 
                             <div class="col-md-6">
-                                <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ $user->profile->title ?? old('title') }}" required autocomplete="name" autofocus>
+                                <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title')  ??  $user->profile->title }}" required autocomplete="name" autofocus>
 
                                 @error('title')
                                     <span class="invalid-feedback" role="alert">
@@ -33,7 +33,7 @@
                             <label for="description" class="col-md-4 col-form-label text-md-right">Description</label>
 
                             <div class="col-md-6">
-                                <input id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description" value="{{ $user->profile->description ?? old('description') }}" required autocomplete="description">
+                                <input id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description" value="{{  old('description') ??  $user->profile->description }}" required autocomplete="description">
 
                                 @error('description')
                                     <span class="invalid-feedback" role="alert">
@@ -47,12 +47,12 @@
                             <label for="url" class="col-md-4 col-form-label text-md-right">Url</label>
 
                             <div class="col-md-6">
-                                <input id="url" type="text" class="form-control @error('password') is-invalid @enderror" name="url" required autocomplete="url" value="{{ $user->profile->url ?? old('url')}}">
+                                <input id="url" type="text" class="form-control @error('password') is-invalid @enderror" name="url" required autocomplete="url" value="{{  old('url') ??  $user->profile->url }}">
 
                                 @error('url')
-                                    <span class="invalid-feedback" role="alert">
+                                    
                                         <strong>{{ $message }}</strong>
-                                    </span>
+                                    
                                 @enderror
                             </div>
                         </div>
@@ -62,6 +62,12 @@
 
                             <div class="col-md-6">
                                 <input id="image" type="file" class="form-control" name="image">
+
+                                @error('image')
+                                    
+                                        <strong>{{ $message }}</strong>
+                                    
+                                @enderror
                             </div>
                         </div>
 
